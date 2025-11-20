@@ -1,0 +1,23 @@
+version: "3.8"
+
+# volumes:
+#   production_nextjs_data:
+#     driver: local
+#     driver_opts:
+#       type: none
+#       o: bind
+#       device: /mnt/swps-data-volume/data/production_nextjs_data
+
+networks:
+  reverse-proxy_swps-reverse-proxy:
+    external: true
+
+services:
+  nextjs:
+    build:
+      context: .
+      dockerfile: ./compose/production/nextjs/Dockerfile
+    ports:
+      - "3001:3001"
+    networks:
+      reverse-proxy_swps-reverse-proxy:
